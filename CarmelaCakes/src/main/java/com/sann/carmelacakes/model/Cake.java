@@ -9,7 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.sann.carmelacakes.model.constants.CakeShape;
 import com.sann.carmelacakes.model.constants.CakeSize;
@@ -24,19 +24,19 @@ public class Cake {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private DoughType dough;
 
-	@NotBlank
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private FillingType filling;
 
-	@NotBlank
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private CakeSize size;
 
-	@NotBlank
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private CakeShape shape;
 

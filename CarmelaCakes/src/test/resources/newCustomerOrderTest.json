@@ -1,0 +1,23 @@
+{
+    "id": 4,
+    "cake": {
+        "id": 4,
+        "dough": "LOW_CARB",
+        "filling": "DULCE_LECHE",
+        "size": "LARGE",
+        "shape": "TRIANGULAR",
+        "toppings": [
+            "STRAWBERRY"
+        ]
+    },
+    "isDelivery": true,
+    "price": 150.00,
+    "orderDate": "2022-11-27",
+    "deliveryDate": "2022-12-02",
+    "status": "RECEIVED",
+    "customer": {
+        "id": 3,
+        "name": "Bruno Sann",
+        "address": "Oxford Street"
+    }
+}

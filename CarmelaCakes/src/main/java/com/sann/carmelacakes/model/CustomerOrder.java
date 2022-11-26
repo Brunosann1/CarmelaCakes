@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.sann.carmelacakes.model.constants.OrderStatus;
 
@@ -22,24 +22,27 @@ public class CustomerOrder {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
 	@OneToOne
 	private Cake cake;
 
+	@NotNull
 	@ManyToOne
 	private Customer customer;
 
-	@NotBlank
+	@NotNull
 	private Boolean isDelivery;
 
-	@NotBlank
+	@NotNull
 	private BigDecimal price;
 
+	@NotNull
 	private LocalDate orderDate = LocalDate.now();
 
-	@NotBlank
+	@NotNull
 	private LocalDate deliveryDate;
 
-	@NotBlank
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private OrderStatus status;
 
@@ -68,11 +71,11 @@ public class CustomerOrder {
 		this.cake = cake;
 	}
 
-	public Customer getClient() {
+	public Customer getCustomer() {
 		return customer;
 	}
 
-	public void setClient(Customer customer) {
+	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
 
