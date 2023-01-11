@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
-import com.sann.carmelacakes.controller.CakeOrderController;
-import com.sann.carmelacakes.model.CakeOrder;
-import com.sann.carmelacakes.repository.CakeOrderRepository;
+import com.sann.carmelacakes.controller.OrderController;
+import com.sann.carmelacakes.model.Order;
+import com.sann.carmelacakes.repository.OrderRepository;
 import com.sann.carmelacakes.repository.CakeRepository;
 
 import okhttp3.MediaType;
@@ -17,13 +17,13 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 
 @Service
-public class CakeOrderService {
+public class OrderService {
 
 	@Autowired
 	private Environment env; // loads properties from application.properties
 
 	@Autowired
-	private CakeOrderRepository cakeOrderRepository;
+	private OrderRepository cakeOrderRepository;
 
 	@Autowired
 	private CakeRepository cakeService;
@@ -31,15 +31,15 @@ public class CakeOrderService {
 	@Autowired
 	private CustomerService customerService;
 
-	private final Logger log = LoggerFactory.getLogger(CakeOrderController.class);
+	private final Logger log = LoggerFactory.getLogger(OrderController.class);
 
-	public CakeOrder newCakeOrder(CakeOrder cakeOrder) {
+	public Order newCakeOrder(Order cakeOrder) {
 
 		setDeliverySchedule(cakeOrder);
 		return saveNewCakeOrder(cakeOrder);
 	}
 
-	private CakeOrder saveNewCakeOrder(CakeOrder cakeOrder) {
+	private Order saveNewCakeOrder(Order cakeOrder) {
 		try {
 			cakeOrder.setCake(cakeService.save(cakeOrder.getCake()));
 			cakeOrder.setCustomer(customerService.save(cakeOrder.getCustomer()));
@@ -51,14 +51,14 @@ public class CakeOrderService {
 		}
 	}
 
-	private CakeOrder save(CakeOrder cakeOrder) {
+	private Order save(Order cakeOrder) {
 		return cakeOrderRepository.save(cakeOrder);
 	}
 
 	/*
 	 * Consumes WeDeliver's API and tries to schedule the cakeOrder delivery
 	 */
-	private void setDeliverySchedule(CakeOrder cakeOrder) {
+	private void setDeliverySchedule(Order cakeOrder) {
 
 		try {
 			String deliveryJson = prepareDeliveryJson(cakeOrder);
@@ -78,7 +78,7 @@ public class CakeOrderService {
 
 	}
 
-	private String prepareDeliveryJson(CakeOrder newOrderRequest) {
+	private String prepareDeliveryJson(Order newOrderRequest) {
 		String json = "{\r\n" + "        \"id\": 2,\r\n" + "        \"creationDate\": \"2023-01-06\",\r\n"
 				+ "        \"scheduledDate\": \"2023-01-12\",\r\n" + "        \"scheduledTime\": \"14:00:00\",\r\n"
 				+ "        \"address\": \"unit 12, 106 Tokyo Street\",\r\n" + "        \"rider\": {\r\n"
@@ -88,7 +88,7 @@ public class CakeOrderService {
 		return json;
 	}
 
-	public Iterable<CakeOrder> findAll() {
+	public Iterable<Order> findAll() {
 		return cakeOrderRepository.findAll();
 	}
 }

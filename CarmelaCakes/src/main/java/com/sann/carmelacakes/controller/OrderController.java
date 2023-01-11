@@ -9,27 +9,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sann.carmelacakes.model.CakeOrder;
-import com.sann.carmelacakes.service.CakeOrderService;
+import com.sann.carmelacakes.model.Order;
+import com.sann.carmelacakes.service.OrderService;
 
 @RestController
 @RequestMapping("/order")
-public class CakeOrderController {
+public class OrderController {
 
 	@Autowired
-	CakeOrderService cakeOrderService;
+	OrderService cakeOrderService;
 
 	@GetMapping("/all")
-	public Iterable<CakeOrder> allOrders() {
+	public Iterable<Order> allOrders() {
 		return cakeOrderService.findAll();
 	}
 
 	@PostMapping("/new")
-	public ResponseEntity<CakeOrder> newOrder(@RequestBody CakeOrder cakeOrder) {
+	public ResponseEntity<Order> newOrder(@RequestBody Order cakeOrder) {
 		if (cakeOrderService.newCakeOrder(cakeOrder) != null) {
-			return new ResponseEntity<CakeOrder>(cakeOrder, HttpStatus.CREATED);
+			return new ResponseEntity<Order>(cakeOrder, HttpStatus.CREATED);
 		}
 		
-		return new ResponseEntity<CakeOrder>(HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<Order>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

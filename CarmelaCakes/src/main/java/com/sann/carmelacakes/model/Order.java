@@ -15,8 +15,8 @@ import javax.validation.constraints.NotNull;
 
 import com.sann.carmelacakes.model.constants.OrderStatus;
 
-@Entity
-public class CakeOrder {
+@Entity(name = "cake_order")
+public class Order {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,7 +46,7 @@ public class CakeOrder {
 	@Enumerated(EnumType.STRING)
 	private OrderStatus status;
 
-	public CakeOrder(Cake cake, Customer customer, Boolean isDelivery, BigDecimal price, LocalDate deliveryDate,
+	public Order(Cake cake, Customer customer, Boolean isDelivery, BigDecimal price, LocalDate deliveryDate,
 			OrderStatus status) {
 		this.cake = cake;
 		this.customer = customer;
@@ -56,7 +56,7 @@ public class CakeOrder {
 		this.status = status;
 	}
 
-	public CakeOrder() {
+	public Order() {
 	}
 
 	public Long getId() {
